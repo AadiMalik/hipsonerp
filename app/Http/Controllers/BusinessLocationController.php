@@ -45,8 +45,7 @@ class BusinessLocationController extends Controller
         if (request()->ajax()) {
             $business_id = request()->session()->get('user.business_id');
 
-            $locations = BusinessLocation::where('business_locations.business_id', $business_id)
-                ->leftjoin(
+            $locations = BusinessLocation::leftjoin(
                     'invoice_schemes as ic',
                     'business_locations.invoice_scheme_id',
                     '=',

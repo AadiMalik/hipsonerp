@@ -96,8 +96,13 @@ class CashRegisterController extends Controller
         } catch (\Exception $e) {
             \Log::emergency('File:'.$e->getFile().'Line:'.$e->getLine().'Message:'.$e->getMessage());
         }
-
-        return redirect()->action([\App\Http\Controllers\SellPosController::class, 'create'], ['sub_type' => $sub_type]);
+        return response()->json([
+            'success' => true,
+            'redirect_url' => action([\App\Http\Controllers\SellPosController::class, 'create'], [
+                'sub_type' => $request->sub_type
+            ])
+        ]);
+        // return redirect()->action([\App\Http\Controllers\SellPosController::class, 'create'], ['sub_type' => $sub_type]);
     }
 
     /**
@@ -228,7 +233,10 @@ class CashRegisterController extends Controller
                 'msg' => __('messages.something_went_wrong'),
             ];
         }
-
-        return redirect()->back()->with('status', $output);
+        return response()->json([
+            'success' => true,
+            'msg' => 'Register closed successfully.'
+        ]);
+        // return redirect()->back()->with('status', $output);
     }
 }
