@@ -1,7 +1,7 @@
-<div class="modal-dialog modal-lg" role="document">
+<div class="modal-dialog modal-lg" role="document" id="close-register-modal">
   <div class="modal-content">
-    {!! Form::open(['url' => action([\App\Http\Controllers\CashRegisterController::class, 'postCloseRegister']), 'method' => 'post' ]) !!}
-
+  {!! Form::open(['route' => 'cash-register.close-register', 'method' => 'post']) !!}
+    @csrf
     {!! Form::hidden('user_id', $register_details->user_id); !!}
     <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -93,7 +93,7 @@
     </div>
     <div class="modal-footer">
       <button type="button" class="tw-dw-btn tw-dw-btn-neutral tw-text-white" data-dismiss="modal">@lang( 'messages.cancel' )</button>
-      <button type="submit" class="tw-dw-btn tw-dw-btn-primary tw-text-white">@lang( 'cash_register.close_register' )</button>
+      <button type="submit" class="tw-dw-btn tw-dw-btn-primary tw-text-white" id="close-register">@lang( 'cash_register.close_register' )</button>
     </div>
     {!! Form::close() !!}
   </div><!-- /.modal-content -->
